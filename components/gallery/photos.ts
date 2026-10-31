@@ -1,4 +1,5 @@
 import type { Category } from "../categoryData";
+import { alts } from "./alts";
 import manifest from "./photos.json";
 
 export type Photo = {
@@ -6,12 +7,16 @@ export type Photo = {
   width: number;
   height: number;
   blur: string;
+  alt?: string;
 };
 
 const photos: Record<string, Photo[]> = manifest;
 
 export function photosFor(slug: string): Photo[] {
-  return photos[slug] ?? [];
+  return (photos[slug] ?? []).map((p) => ({
+    ...p,
+    alt: alts[p.src.replace(/^\/photos\//, "").replace(/\.webp$/, "")],
+  }));
 }
 
 export type Cover = Photo & { focus: string };

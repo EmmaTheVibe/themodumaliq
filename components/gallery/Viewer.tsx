@@ -251,7 +251,7 @@ export default function Viewer({ items, title, short, start, rectOf, onClosed }:
                   {item.photo && (
                     <Image
                       src={item.photo.src}
-                      alt={i === index ? `${title}, photograph ${i + 1}` : ""}
+                      alt={i === index ? (item.photo.alt ?? `${title}, photograph ${i + 1}`) : ""}
                       fill
                       sizes={narrow ? "85vw" : "60vw"}
                       placeholder="blur"

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Allison, Cormorant_Garamond, Montserrat } from "next/font/google";
+import { BRAND, SITE_URL } from "@/components/site";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -21,9 +22,12 @@ const allison = Allison({
 });
 
 export const metadata: Metadata = {
-  title: "themodumaliq photography",
+  metadataBase: new URL(SITE_URL),
+  title: { default: BRAND, template: `%s | ${BRAND}` },
   description:
-    "Corporate headshots, personal branding portraits and corporate events by Moses, a visual storyteller working between Lagos and Ondo States, Nigeria.",
+    "Corporate headshots, personal branding portraits and event photography by Moses Momodu, working across Lagos, Ondo and the rest of Nigeria.",
+  openGraph: { siteName: BRAND, locale: "en_NG", type: "website" },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

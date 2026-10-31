@@ -245,7 +245,7 @@ export default function Categories({ visible = true }: Props) {
                     {banner ? (
                       <Image
                         src={banner.src}
-                        alt={category.title}
+                        alt={banner.alt ?? category.title}
                         fill
                         sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
                         placeholder="blur"

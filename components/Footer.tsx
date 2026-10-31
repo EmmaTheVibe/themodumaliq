@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { INSTAGRAM } from "./site";
 import Year from "./Year";
 
 const socials: { label: string; href: string; icon: ReactNode }[] = [
@@ -14,7 +15,7 @@ const socials: { label: string; href: string; icon: ReactNode }[] = [
   },
   {
     label: "Instagram",
-    href: "https://www.instagram.com/themodumaliq",
+    href: INSTAGRAM,
     icon: (
       <>
         <rect x="3" y="3" width="18" height="18" rx="5" />

@@ -1,5 +1,7 @@
 "use server";
 
+import { EMAIL } from "@/components/site";
+
 export type Field = "name" | "email" | "message";
 
 export type ContactState = {
@@ -9,8 +11,8 @@ export type ContactState = {
   values?: Record<Field, string>;
 };
 
-const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const FALLBACK = "Please reach out on Instagram for now: @themodumaliq.";
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const FALLBACK = `You can also email ${EMAIL} directly.`;
 
 export async function sendMessage(_prev: ContactState, form: FormData): Promise<ContactState> {
   const values = {
@@ -24,14 +26,14 @@ export async function sendMessage(_prev: ContactState, form: FormData): Promise<
   const errors: ContactState["errors"] = {};
   if (!values.name) errors.name = "Please tell me your name.";
   else if (values.name.length > 120) errors.name = "That name is a little long.";
-  if (!EMAIL.test(values.email)) errors.email = "Please enter a valid email address.";
+  if (!EMAIL_PATTERN.test(values.email)) errors.email = "Please enter a valid email address.";
   if (!values.message) errors.message = "Please write a short message.";
   else if (values.message.length > 5000) errors.message = "Please keep it under 5,000 characters.";
   if (Object.keys(errors).length) return { status: "error", errors, values };
 
   const key = process.env.RESEND_API_KEY;
-  const to = process.env.CONTACT_EMAIL;
-  if (!key || !to) {
+  const to = process.env.CONTACT_EMAIL ?? EMAIL;
+  if (!key) {
     return { status: "error", message: `The contact form isn’t connected yet. ${FALLBACK}`, values };
   }
 

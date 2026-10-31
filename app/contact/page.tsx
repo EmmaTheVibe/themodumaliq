@@ -4,20 +4,36 @@ import PrintStack from "@/components/contact/PrintStack";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { photosFor, type Photo } from "@/components/gallery/photos";
+import { EMAIL } from "@/components/site";
 
 export const metadata: Metadata = {
-  title: "Contact · themodumaliq photography",
+  title: "Contact",
   description:
-    "Say hello. Corporate headshots, personal branding imagery and coverage for business and corporate events across Nigeria.",
+    "Book corporate headshots, personal branding portraits or event coverage in Lagos, Ondo or anywhere in Nigeria. Send a message or email themodumaliqphotos@gmail.com.",
+  alternates: { canonical: "/contact" },
 };
 
+const STACK = [
+  "headshots/img_0260",
+  "portraits/img_1611",
+  "headshots/img_0894",
+  "portraits/img_1905",
+  "headshots/img_0897",
+  "portraits/img_1977",
+  "headshots/img_1102",
+  "portraits/img_2115",
+  "headshots/img_1152",
+  "portraits/img_2252",
+  "headshots/img_1775",
+  "portraits/img_2254",
+];
+
 function stackPhotos(): Photo[] {
-  const lists = ["headshots", "portraits", "corporate-events"].map((slug) =>
-    photosFor(slug).filter((p) => p.height >= p.width),
-  );
-  const out: Photo[] = [];
-  for (let i = 0; lists.some((l) => i < l.length); i++) lists.forEach((l) => l[i] && out.push(l[i]));
-  return out;
+  return STACK.flatMap((entry) => {
+    const [slug, name] = entry.split("/");
+    const photo = photosFor(slug).find((p) => p.src.endsWith(`/${name}.webp`));
+    return photo ? [photo] : [];
+  });
 }
 
 export default function ContactPage() {
@@ -50,6 +66,12 @@ export default function ContactPage() {
             </p>
           </div>
           <ContactForm />
+          <p className="mt-10 text-[13px] tracking-[0.04em] opacity-70">
+            Prefer email? Write to{" "}
+            <a href={`mailto:${EMAIL}`} className="border-b border-foreground/30 transition-colors hover:border-foreground">
+              {EMAIL}
+            </a>
+          </p>
         </div>
       </section>
       <Footer />

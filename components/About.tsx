@@ -70,7 +70,7 @@ export default function About({ portrait }: { portrait?: Photo }) {
               src={portrait.src}
               width={portrait.width}
               height={portrait.height}
-              alt="Moses, the photographer behind themodumaliq, in a white shirt with his arms crossed"
+              alt={portrait.alt ?? "Moses Momodu"}
               sizes="(min-width: 1024px) 40vw, (min-width: 640px) 520px, 100vw"
               placeholder="blur"
               blurDataURL={portrait.blur}

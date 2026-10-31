@@ -61,8 +61,7 @@ export function getLogoParts(root: HTMLElement): LogoParts {
 export default function Logo() {
   return (
     <div className="pointer-events-none absolute inset-x-0 top-1/2 flex -translate-y-1/2 justify-center px-6">
-      <h1 data-headline className="invisible w-[min(88vw,880px)]">
-        <span className="sr-only">themodumaliq photography</span>
+      <div data-headline aria-hidden className="invisible w-[min(88vw,880px)]">
         <svg aria-hidden viewBox={LOGO_VIEWBOX} className="block h-auto w-full overflow-visible">
           <g
             fill="none"
@@ -92,7 +91,7 @@ export default function Logo() {
             ))}
           </g>
         </svg>
-      </h1>
+      </div>
     </div>
   );
 }

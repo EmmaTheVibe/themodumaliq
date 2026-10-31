@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { categories } from "@/components/categoryData";
 import Footer from "@/components/Footer";
 import Gallery from "@/components/gallery/Gallery";
-import { coverFor } from "@/components/gallery/photos";
+import { coverFor, photosFor } from "@/components/gallery/photos";
 import Navbar from "@/components/Navbar";
 
 export function generateStaticParams() {
@@ -14,7 +14,15 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps<"/[category]">): Promise<Metadata> {
   const { category } = await params;
   const match = categories.find((c) => c.slug === category);
-  return { title: match ? `${match.title} · themodumaliq photography` : "themodumaliq photography" };
+  if (!match) return {};
+  const cover = coverFor(match);
+  return {
+    title: match.seoTitle,
+    description: match.description,
+    alternates: { canonical: `/${match.slug}` },
+    robots: photosFor(match.slug).length ? undefined : { index: false, follow: true },
+    openGraph: cover ? { images: [{ url: cover.src, width: cover.width, height: cover.height, alt: cover.alt }] } : undefined,
+  };
 }
 
 export default function CategoryPage({ params }: PageProps<"/[category]">) {
@@ -37,6 +45,7 @@ async function CategoryGallery({ params }: Pick<PageProps<"/[category]">, "param
       slug={match.slug}
       title={match.title}
       short={match.short}
+      intro={{ heading: match.seoTitle, text: match.intro }}
       palette={match.slides}
       cover={coverFor(match)}
       footer={<Footer />}

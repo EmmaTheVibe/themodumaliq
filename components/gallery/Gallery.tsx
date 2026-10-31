@@ -2,6 +2,7 @@
 
 import { useLayoutEffect, useMemo, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import gsap from "gsap";
 import { Flip } from "gsap/Flip";
 import { useGSAP } from "@gsap/react";
@@ -44,12 +45,13 @@ type Props = {
   slug: string;
   title: string;
   short: string;
+  intro: { heading: string; text: string };
   palette: string[];
   cover?: Cover;
   footer: ReactNode;
 };
 
-export default function Gallery({ slug, title, short, palette, cover, footer }: Props) {
+export default function Gallery({ slug, title, short, intro, palette, cover, footer }: Props) {
   const stage = useRef<HTMLDivElement>(null);
   const zoom = useRef<HTMLDivElement>(null);
   const pan = useRef<HTMLDivElement>(null);
@@ -226,7 +228,7 @@ export default function Gallery({ slug, title, short, palette, cover, footer }: 
                       {item.photo ? (
                         <Image
                           src={item.photo.src}
-                          alt={`${title}, photograph ${item.id}`}
+                          alt={item.photo.alt ?? `${title}, photograph ${item.id}`}
                           fill
                           sizes={i < 2 ? "(max-width: 767px) 100vw, 50vw" : `(min-width: 1024px) ${Math.round(100 / cols)}vw, 50vw`}
                           placeholder="blur"
@@ -241,6 +243,16 @@ export default function Gallery({ slug, title, short, palette, cover, footer }: 
                   ))}
                 </div>
               </div>
+              <section className="mx-auto max-w-[60ch] px-6 pt-16 pb-20 text-center md:pt-24 md:pb-28">
+                <h2 className="font-display text-[clamp(28px,3.4vw,44px)] leading-[1.05] font-light">{intro.heading}</h2>
+                <p className="mt-6 text-[15px] leading-[1.8] font-light opacity-80 md:text-[16px]">{intro.text}</p>
+                <Link
+                  href="/contact"
+                  className="mt-9 inline-block border border-foreground/40 px-8 py-4 text-[11px] tracking-[0.3em] uppercase transition-colors hover:border-foreground hover:bg-foreground hover:text-background"
+                >
+                  Book a session
+                </Link>
+              </section>
               {footer}
             </div>
           </div>
