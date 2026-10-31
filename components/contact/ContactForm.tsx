@@ -1,20 +1,32 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { sendMessage, type ContactState, type Field } from "@/app/contact/actions";
-import { SHOOTS } from "./shoots";
+import { LIMITS } from "./rules";
+import ShootSelect from "./ShootSelect";
 
 const initial: ContactState = { status: "idle" };
 
-const fields: { name: Field; label: string; type?: string; autoComplete?: string }[] = [
-  { name: "name", label: "Name", autoComplete: "name" },
-  { name: "email", label: "Email address", type: "email", autoComplete: "email" },
+const FIELD =
+  "mt-3 w-full border-0 border-b border-foreground/30 bg-transparent px-0 py-2.5 text-[16px] font-light outline-none transition-colors placeholder:text-foreground/30 focus:border-foreground aria-invalid:border-[#d97a7a]";
+
+const fields: { name: Field; label: string; type?: string; autoComplete?: string; max?: number }[] = [
+  { name: "name", label: "Name", autoComplete: "name", max: LIMITS.name },
+  { name: "email", label: "Email address", type: "email", autoComplete: "email", max: LIMITS.email },
   { name: "shoot", label: "Kind of shoot" },
-  { name: "message", label: "Message" },
+  { name: "message", label: "Message", max: LIMITS.message },
 ];
 
 export default function ContactForm() {
   const [state, action, pending] = useActionState(sendMessage, initial);
+  const [count, setCount] = useState(0);
+  const [round, setRound] = useState(0);
+  const [counted, setCounted] = useState(state);
+  if (state !== counted) {
+    setCounted(state);
+    setCount(state.values?.message.length ?? 0);
+    setRound((r) => r + 1);
+  }
 
   if (state.status === "sent") {
     return (
@@ -36,47 +48,46 @@ export default function ContactForm() {
           id,
           name: f.name,
           required: true,
+          maxLength: f.max,
           defaultValue: state.values?.[f.name],
           "aria-invalid": error ? true : undefined,
-          "aria-describedby": error ? `${id}-error` : undefined,
-          className:
-            "mt-3 block w-full border-0 border-b border-foreground/30 bg-transparent px-0 py-2.5 text-[16px] font-light outline-none transition-colors placeholder:text-foreground/30 focus:border-foreground aria-invalid:border-[#d97a7a]",
+          "aria-describedby":
+            [error && `${id}-error`, f.name === "message" && `${id}-count`].filter(Boolean).join(" ") || undefined,
+          className: `block ${FIELD}`,
         };
         return (
           <div key={f.name}>
-            <label htmlFor={id} className="text-[11px] tracking-[0.3em] uppercase opacity-80">
+            <label htmlFor={id} id={`${id}-label`} className="text-[11px] tracking-[0.3em] uppercase opacity-80">
               {f.label} <span aria-hidden>*</span>
             </label>
             {f.name === "message" ? (
-              <textarea {...shared} rows={5} className={`${shared.className} resize-y`} />
-            ) : f.name === "shoot" ? (
-              <div className="relative">
-                <select
+              <>
+                <textarea
                   {...shared}
-                  defaultValue={state.values?.shoot ?? ""}
-                  className={`${shared.className} cursor-pointer appearance-none pr-8 invalid:text-foreground/40`}
-                  style={{ colorScheme: "dark" }}
+                  rows={5}
+                  onInput={(e) => setCount(e.currentTarget.value.length)}
+                  className={`${shared.className} resize-y`}
+                />
+                <p
+                  id={`${id}-count`}
+                  className={`mt-2 text-right text-[11px] tracking-[0.1em] tabular-nums transition-colors ${
+                    count >= LIMITS.message ? "text-[#e08f8f]" : count >= LIMITS.message * 0.9 ? "opacity-90" : "opacity-50"
+                  }`}
                 >
-                  <option value="" disabled>
-                    Select one…
-                  </option>
-                  {SHOOTS.map((s) => (
-                    <option key={s} value={s}>
-                      {s}
-                    </option>
-                  ))}
-                </select>
-                <svg
-                  viewBox="0 0 24 24"
-                  className="pointer-events-none absolute top-1/2 right-0 mt-1.5 size-4 -translate-y-1/2 opacity-70"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={1.25}
-                  aria-hidden
-                >
-                  <path d="M6 9l6 6 6-6" />
-                </svg>
-              </div>
+                  {count.toLocaleString("en")} / {LIMITS.message.toLocaleString("en")}
+                </p>
+              </>
+            ) : f.name === "shoot" ? (
+              <ShootSelect
+                key={round}
+                id={id}
+                name={f.name}
+                labelId={`${id}-label`}
+                defaultValue={state.values?.shoot}
+                invalid={Boolean(error)}
+                describedBy={shared["aria-describedby"]}
+                className={FIELD}
+              />
             ) : (
               <input {...shared} type={f.type ?? "text"} autoComplete={f.autoComplete} />
             )}

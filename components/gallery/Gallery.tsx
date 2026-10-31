@@ -154,6 +154,12 @@ function GalleryVisit({ slug, title, short, intro, palette, cover, footer }: Pro
         })
         .add(Flip.from(from, { duration: 1, ease: "power2.inOut" }), 0)
         .to(navbar(), { yPercent: 0, duration: 0.7, ease: "power2.out" }, 0)
+        .fromTo(
+          navbar()?.querySelector("[data-nav-title]") ?? [],
+          { x: -24, opacity: 0, filter: "blur(4px)" },
+          { x: 0, opacity: 1, filter: "blur(0px)", duration: 0.8, ease: "power3.out", clearProps: "filter" },
+          0.45,
+        )
         .to(
           list.slice(leads),
           { opacity: 1, filter: "blur(0px)", duration: 0.5, ease: "power2.out", stagger: 0.01, clearProps: "opacity,filter" },

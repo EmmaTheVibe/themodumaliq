@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Accent from "@/components/Accent";
 import ContactForm from "@/components/contact/ContactForm";
 import PrintStack from "@/components/contact/PrintStack";
 import Footer from "@/components/Footer";
@@ -49,7 +50,11 @@ export default function ContactPage() {
           <h1 className="font-display text-[clamp(40px,5.5vw,80px)] leading-[0.95] font-light">
             Say hello.
             <span className="block">
-              Let’s work <span className="font-script text-[1.1em]">together</span>.
+              Let’s work{" "}
+              <Accent delay={500} className="font-script text-[1.1em]">
+                together
+              </Accent>
+              .
             </span>
           </h1>
           <div className="mt-8 space-y-5 text-[15px] leading-[1.8] font-light opacity-90 md:text-[16px]">

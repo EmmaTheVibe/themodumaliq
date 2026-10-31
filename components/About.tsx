@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import Accent from "./Accent";
 import type { Photo } from "./gallery/photos";
 
 gsap.registerPlugin(useGSAP);
@@ -89,7 +90,10 @@ export default function About({ portrait }: { portrait?: Photo }) {
           data-rise
           className="mt-5 font-display text-[clamp(44px,6vw,88px)] leading-[0.95] font-light opacity-0 motion-reduce:opacity-100 fit:text-[clamp(40px,5vw,76px)]"
         >
-          Hey, I am <span className="font-script text-[1.15em]">Moses</span>
+          Hey, I am{" "}
+          <Accent delay={700} className="font-script text-[1.15em]">
+            Moses
+          </Accent>
         </h1>
         <div className="mt-8 space-y-5 text-[15px] leading-[1.8] font-light md:text-[16px] fit:mt-6 fit:leading-[1.7]">
           <p data-rise className="opacity-0 motion-reduce:opacity-100">
@@ -100,7 +104,8 @@ export default function About({ portrait }: { portrait?: Photo }) {
             supports clarity, credibility, and growth.
           </p>
           <p data-rise className="opacity-0 motion-reduce:opacity-100">
-            I work mostly between Lagos and Ondo States, and with clients across Nigeria, which has shaped a flexible,
+            I work mostly between <Accent delay={500}>Lagos</Accent> and <Accent delay={750}>Ondo</Accent> States, and
+            with clients <Accent delay={1000}>across Nigeria</Accent>, which has shaped a flexible,
             people-first approach to my craft. Calm, collaborative, and detail-driven, I prioritize making clients feel
             comfortable while thinking strategically about how each image will be used. For me, strong visuals aren’t
             just about aesthetics—they’re about telling the right story, the right way.

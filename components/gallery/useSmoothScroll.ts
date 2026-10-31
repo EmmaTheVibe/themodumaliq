@@ -12,6 +12,7 @@ const MORPH_AT = 0.82;
 
 const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v));
 const alphaFor = (lerp: number, dt: number) => 1 - Math.pow(1 - lerp, dt / 16.67);
+const inDialog = (e: Event) => e.target instanceof Element && e.target.closest("dialog[open]") !== null;
 
 export type SmoothScroll = {
   ready: () => void;
@@ -136,7 +137,7 @@ export function useSmoothScroll(parts: Parts, onMorph: () => void): RefObject<Sm
     };
 
     const onWheel = (e: WheelEvent) => {
-      if (e.ctrlKey || locked) return;
+      if (e.ctrlKey || locked || inDialog(e)) return;
       e.preventDefault();
       const unit = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? window.innerHeight : 1;
       scrollBy(e.deltaY * unit);
@@ -146,7 +147,7 @@ export function useSmoothScroll(parts: Parts, onMorph: () => void): RefObject<Sm
     let lastY = 0;
     let lastVelocity = 0;
     const onPointerDown = (e: PointerEvent) => {
-      if (e.pointerType !== "touch" || locked) return;
+      if (e.pointerType !== "touch" || locked || inDialog(e)) return;
       dragging = true;
       lastY = e.clientY;
       lastVelocity = 0;
@@ -165,7 +166,7 @@ export function useSmoothScroll(parts: Parts, onMorph: () => void): RefObject<Sm
     };
 
     const onKey = (e: KeyboardEvent) => {
-      if (locked) return;
+      if (locked || inDialog(e)) return;
       const el = e.target as HTMLElement | null;
       if (el?.closest("input, textarea, select, [contenteditable='true']")) return;
       const page = window.innerHeight * 0.9;
