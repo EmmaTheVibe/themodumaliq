@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   const portrait = photosFor("personal").find((p) => p.src.endsWith("/img_1253.webp"));
   return (
-    <main className="flex min-h-dvh flex-col fit:h-dvh fit:overflow-hidden">
+    <main className="flex min-h-dvh flex-col overflow-x-clip fit:h-dvh fit:overflow-hidden">
       <Navbar />
       <About portrait={portrait} />
       <Footer />

@@ -19,7 +19,7 @@ export default function Landing({ footer }: { footer: ReactNode }) {
   }, [revealed]);
 
   return (
-    <div className="flex min-h-dvh flex-col">
+    <div className="flex min-h-dvh flex-col overflow-x-clip">
       <Navbar visible={revealed} />
       <Categories visible={revealed} />
       {footer}

@@ -263,7 +263,7 @@ export default function Categories({ visible = true }: Props) {
 
                 <div
                   aria-hidden
-                  className={`pointer-events-none absolute z-10 -translate-y-[1.12em] font-display text-[clamp(36px,4.2vw,72px)] leading-none font-light whitespace-nowrap uppercase ${
+                  className={`pointer-events-none absolute z-10 hidden -translate-y-[1.12em] font-display lg:block text-[clamp(36px,4.2vw,72px)] leading-none font-light whitespace-nowrap uppercase ${
                     i < categories.length / 2
                       ? "top-full left-0 -translate-x-[0.4em]"
                       : "top-0 right-0 translate-x-[0.4em]"
