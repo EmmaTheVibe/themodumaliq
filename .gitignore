@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# full-size photo originals (up to ~25 MB each): never committed, only the
+# per-category folders are kept so the structure survives a fresh clone
+/photos/originals/*/*
+!/photos/originals/*/.gitkeep
