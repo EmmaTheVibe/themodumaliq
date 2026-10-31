@@ -25,9 +25,14 @@ type Parts = {
   hero: RefObject<HTMLElement | null>;
 };
 
-export function useSmoothScroll(parts: Parts, onMorph: () => void): RefObject<SmoothScroll> {
+export function useSmoothScroll(
+  parts: Parts,
+  onMorph: () => void,
+  introDone: RefObject<boolean>,
+): RefObject<SmoothScroll> {
   const api = useRef<SmoothScroll>({ ready: () => {}, lock: () => {} });
   const morphRef = useRef(onMorph);
+  const saved = useRef(0);
 
   useEffect(() => {
     morphRef.current = onMorph;
@@ -47,9 +52,10 @@ export function useSmoothScroll(parts: Parts, onMorph: () => void): RefObject<Sm
     const prevOverflow = html.style.overflow;
     html.style.overflow = "hidden";
 
-    let mode: "intro" | "morphing" | "ready" = reduce.matches ? "ready" : "intro";
-    let target = 0;
-    let current = 0;
+    const resume = introDone.current;
+    let mode: "intro" | "morphing" | "ready" = reduce.matches || resume ? "ready" : "intro";
+    let target = resume ? saved.current : 0;
+    let current = target;
     let max = 0;
     let introTarget = 0;
     let introCurrent = 0;
@@ -82,7 +88,7 @@ export function useSmoothScroll(parts: Parts, onMorph: () => void): RefObject<Sm
         mode = "ready";
         stageEl.style.transform = "none";
         heroEl.style.visibility = "hidden";
-        target = current = 0;
+        target = current = saved.current = 0;
         measure();
       },
     };
@@ -92,6 +98,10 @@ export function useSmoothScroll(parts: Parts, onMorph: () => void): RefObject<Sm
       last = now;
       if (first) {
         stageEl.style.translate = "none";
+        if (mode === "ready") {
+          stageEl.style.transform = "none";
+          heroEl.style.visibility = "hidden";
+        }
         first = false;
       }
 
@@ -123,6 +133,7 @@ export function useSmoothScroll(parts: Parts, onMorph: () => void): RefObject<Sm
         if (Math.abs(target - current) < 0.01) current = target;
         const velocity = ((current - prev) * 16.67) / (dt || 16.67);
         const scale = reduce.matches ? 1 : 1 - Math.min(Math.abs(velocity) * SCALE_PER_PX, MAX_SCALE_DIP);
+        saved.current = current;
         panEl.style.transform = `translate3d(0, ${-current}px, 0)`;
         zoomEl.style.transform = `scale(${scale})`;
       }
@@ -203,7 +214,7 @@ export function useSmoothScroll(parts: Parts, onMorph: () => void): RefObject<Sm
       window.removeEventListener("keydown", onKey);
       html.style.overflow = prevOverflow;
     };
-  }, [stage, zoom, pan, hero]);
+  }, [stage, zoom, pan, hero, introDone]);
 
   return api;
 }

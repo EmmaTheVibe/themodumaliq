@@ -62,6 +62,7 @@ export default function Gallery({ slug, title, short, intro, palette, cover, foo
   const [introPhase, setPhase] = useState<Phase>("intro");
   const phase: Phase = reduced ? "ready" : introPhase;
   const flipFrom = useRef<Flip.FlipState | null>(null);
+  const introDone = useRef(false);
   const [viewing, setViewing] = useState<number | null>(null);
 
   const tier = useSyncExternalStore(subscribeTier, currentTier, (): Tier => "desktop");
@@ -78,7 +79,7 @@ export default function Gallery({ slug, title, short, intro, palette, cover, foo
   const navbar = () => document.querySelector<HTMLElement>("[data-navbar]");
 
   useGSAP(() => {
-    if (reduced) return;
+    if (reduced || introDone.current) return;
     gsap.set(navbar(), { yPercent: -100 });
     gsap
       .timeline()
@@ -99,15 +100,18 @@ export default function Gallery({ slug, title, short, intro, palette, cover, foo
   }, { dependencies: [reduced], revertOnUpdate: true });
 
   const onMorph = () => {
+    introDone.current = true;
     flipFrom.current = Flip.getState(tiles());
     context.add(() => gsap.set(tiles().slice(leads), { opacity: 0, filter: "blur(6px)" }));
     setPhase("morphing");
   };
 
-  const scroll = useSmoothScroll({ stage, zoom, pan, hero }, onMorph);
+  const scroll = useSmoothScroll({ stage, zoom, pan, hero }, onMorph, introDone);
+
+  useLayoutEffect(() => () => setViewing(null), []);
 
   const openViewer = (i: number) => {
-    if (phase !== "ready") return;
+    if (!introDone.current && !reduced) return;
     scroll.current.lock(true);
     setViewing(i);
   };

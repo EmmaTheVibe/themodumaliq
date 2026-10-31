@@ -20,7 +20,7 @@ const business = {
   logo: `${SITE_URL}/icon.png`,
   email: EMAIL,
   description:
-    "Corporate headshots, personal branding portraits and event photography in Lagos, Ondo and across Nigeria.",
+    "Corporate headshots, personal branding portraits and event photography by Moses Momodu in Lagos, Ondo and across Nigeria.",
   founder: { "@type": "Person", name: OWNER, jobTitle: "Photographer" },
   address: { "@type": "PostalAddress", addressLocality: "Lagos", addressCountry: "NG" },
   areaServed: [

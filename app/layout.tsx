@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: { default: BRAND, template: `%s | ${BRAND}` },
   description:
-    "Corporate headshots, personal branding portraits and event photography by Moses Momodu, working across Lagos, Ondo and the rest of Nigeria.",
+    "Corporate headshots, personal branding portraits and event photography by Moses Momodu in Lagos, Ondo and across Nigeria.",
   openGraph: { siteName: BRAND, locale: "en_NG", type: "website" },
   twitter: { card: "summary_large_image" },
 };
