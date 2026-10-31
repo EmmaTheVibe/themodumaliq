@@ -22,7 +22,8 @@ const allison = Allison({
 
 export const metadata: Metadata = {
   title: "themodumaliq photography",
-  description: "themodumaliq photography",
+  description:
+    "Corporate headshots, personal branding portraits and corporate events by Moses, a visual storyteller working between Lagos and Ondo States, Nigeria.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

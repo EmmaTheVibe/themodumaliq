@@ -192,8 +192,8 @@ export default function Gallery({ slug, title, short, palette, cover, footer }: 
       >
         <div data-enter="rise" className="h-full w-full translate-y-(--rise) [--rise:25svh] motion-reduce:[--rise:0px]">
           <div ref={zoom} className="h-full w-full origin-center will-change-transform">
-            <div ref={pan} className="will-change-transform">
-              <div className="@container px-3 pt-20 pb-5 md:px-5 md:pt-24">
+            <div ref={pan} className="flex min-h-dvh flex-col will-change-transform">
+              <div className="@container flex-1 px-3 pt-20 pb-5 md:px-5 md:pt-24">
                 <div
                   ref={grid}
                   data-phase={phase}

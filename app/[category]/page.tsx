@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: PageProps<"/[category]">): Pr
 export default function CategoryPage({ params }: PageProps<"/[category]">) {
   return (
     <main>
-      <Navbar />
+      <Navbar sticky />
       <Suspense fallback={<div className="fixed inset-0 bg-background" />}>
         <CategoryGallery params={params} />
       </Suspense>

@@ -58,6 +58,20 @@
     }
   ],
   "outdoor-landscape": [],
+  "personal": [
+    {
+      "src": "/photos/personal/img_1252.webp",
+      "width": 2400,
+      "height": 1600,
+      "blur": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAAAQAgCdASoQAAsAA4BaJaACdADdh+mTr08AAP7y3Px5Uq8bGTQYO1K2OFSSwfGEzDwSr1s2JWQAAA=="
+    },
+    {
+      "src": "/photos/personal/img_1253.webp",
+      "width": 1800,
+      "height": 2400,
+      "blur": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4IIgAAACQBACdASoQABUAPu1iqU2ppaOiMAgBMB2JYgCdMoMYAEmmBI6ktBDExJjwdtAA/tpelp4AQI04b1QXIkiUCPfdtN8BY2kOhyQICgFyGuR0ok6lVYahGm+W429QPzQI477nwhL/ay4ihwMboDegr1BLBkBndlsOQ+8Hapfh8qrlgqBNLa+Rx9gA"
+    }
+  ],
   "portraits": [
     {
       "src": "/photos/portraits/img_1611.webp",

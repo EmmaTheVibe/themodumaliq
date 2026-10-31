@@ -2,6 +2,8 @@
 
 @source "../components";
 
+@custom-variant fit (@media (min-width: 1024px) and (min-height: 780px));
+
 :root {
   --background: #000000;
   --foreground: #f2f2f2;
@@ -18,4 +20,12 @@
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+html:has([data-no-scrollbar]) {
+  scrollbar-width: none;
+}
+
+html:has([data-no-scrollbar])::-webkit-scrollbar {
+  display: none;
 }
