@@ -42,6 +42,7 @@ async function CategoryGallery({ params }: Pick<PageProps<"/[category]">, "param
   if (!match) notFound();
   return (
     <Gallery
+      key={match.slug}
       slug={match.slug}
       title={match.title}
       short={match.short}

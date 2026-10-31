@@ -25,14 +25,9 @@ type Parts = {
   hero: RefObject<HTMLElement | null>;
 };
 
-export function useSmoothScroll(
-  parts: Parts,
-  onMorph: () => void,
-  introDone: RefObject<boolean>,
-): RefObject<SmoothScroll> {
+export function useSmoothScroll(parts: Parts, onMorph: () => void): RefObject<SmoothScroll> {
   const api = useRef<SmoothScroll>({ ready: () => {}, lock: () => {} });
   const morphRef = useRef(onMorph);
-  const saved = useRef(0);
 
   useEffect(() => {
     morphRef.current = onMorph;
@@ -52,10 +47,9 @@ export function useSmoothScroll(
     const prevOverflow = html.style.overflow;
     html.style.overflow = "hidden";
 
-    const resume = introDone.current;
-    let mode: "intro" | "morphing" | "ready" = reduce.matches || resume ? "ready" : "intro";
-    let target = resume ? saved.current : 0;
-    let current = target;
+    let mode: "intro" | "morphing" | "ready" = reduce.matches ? "ready" : "intro";
+    let target = 0;
+    let current = 0;
     let max = 0;
     let introTarget = 0;
     let introCurrent = 0;
@@ -88,7 +82,7 @@ export function useSmoothScroll(
         mode = "ready";
         stageEl.style.transform = "none";
         heroEl.style.visibility = "hidden";
-        target = current = saved.current = 0;
+        target = current = 0;
         measure();
       },
     };
@@ -135,7 +129,6 @@ export function useSmoothScroll(
         if (Math.abs(target - current) < 0.01) current = target;
         const velocity = ((current - prev) * 16.67) / (dt || 16.67);
         const scale = reduce.matches ? 1 : 1 - Math.min(Math.abs(velocity) * SCALE_PER_PX, MAX_SCALE_DIP);
-        saved.current = current;
         panEl.style.transform = `translate3d(0, ${-current}px, 0)`;
         zoomEl.style.transform = `scale(${scale})`;
       }
@@ -216,7 +209,7 @@ export function useSmoothScroll(
       window.removeEventListener("keydown", onKey);
       html.style.overflow = prevOverflow;
     };
-  }, [stage, zoom, pan, hero, introDone]);
+  }, [stage, zoom, pan, hero]);
 
   return api;
 }

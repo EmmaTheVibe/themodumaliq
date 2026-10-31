@@ -5,13 +5,14 @@ import Image from "next/image";
 import Link from "next/link";
 import gsap from "gsap";
 import { Flip } from "gsap/Flip";
+import { SplitText } from "gsap/SplitText";
 import { useGSAP } from "@gsap/react";
 import { UNITS, galleryItems, introCells, packMasonry } from "./galleryData";
 import type { Cover } from "./photos";
 import { useSmoothScroll } from "./useSmoothScroll";
 import Viewer from "./Viewer";
 
-gsap.registerPlugin(useGSAP, Flip);
+gsap.registerPlugin(useGSAP, Flip, SplitText);
 
 type Tier = "desktop" | "tablet" | "phone";
 type Phase = "intro" | "morphing" | "ready";
@@ -51,7 +52,13 @@ type Props = {
   footer: ReactNode;
 };
 
-export default function Gallery({ slug, title, short, intro, palette, cover, footer }: Props) {
+export default function Gallery(props: Props) {
+  const [visit, setVisit] = useState(0);
+  useLayoutEffect(() => () => setVisit((v) => v + 1), []);
+  return <GalleryVisit key={visit} {...props} />;
+}
+
+function GalleryVisit({ slug, title, short, intro, palette, cover, footer }: Props) {
   const stage = useRef<HTMLDivElement>(null);
   const zoom = useRef<HTMLDivElement>(null);
   const pan = useRef<HTMLDivElement>(null);
@@ -81,6 +88,8 @@ export default function Gallery({ slug, title, short, intro, palette, cover, foo
   useGSAP(() => {
     if (reduced || introDone.current) return;
     gsap.set(navbar(), { yPercent: -100 });
+    const title = hero.current!.querySelector("[data-enter='title']")!;
+    const letters = SplitText.create(title, { type: "words,chars", aria: "none" });
     gsap
       .timeline()
       .to(hero.current, { opacity: 1, duration: 0.7, ease: "power1.out" }, 0)
@@ -90,10 +99,18 @@ export default function Gallery({ slug, title, short, intro, palette, cover, foo
         { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
         0.3,
       )
-      .fromTo(
-        "[data-enter='title']",
-        { opacity: 0, y: 40, filter: "blur(8px)" },
-        { opacity: 1, y: 0, filter: "blur(0px)", duration: 1, ease: "power3.out", clearProps: "filter" },
+      .set(title, { opacity: 1 }, 0.35)
+      .from(
+        letters.chars,
+        {
+          opacity: 0,
+          filter: "blur(10px)",
+          y: () => gsap.utils.random(-8, 8),
+          duration: 0.9,
+          ease: "power2.out",
+          stagger: { each: 0.035, from: "random" },
+          clearProps: "filter",
+        },
         0.35,
       )
       .to("[data-enter='rise']", { "--rise": "0svh", duration: 1.1, ease: "power3.out" }, 0.5);
@@ -106,9 +123,7 @@ export default function Gallery({ slug, title, short, intro, palette, cover, foo
     setPhase("morphing");
   };
 
-  const scroll = useSmoothScroll({ stage, zoom, pan, hero }, onMorph, introDone);
-
-  useLayoutEffect(() => () => setViewing(null), []);
+  const scroll = useSmoothScroll({ stage, zoom, pan, hero }, onMorph);
 
   const openViewer = (i: number) => {
     if (!introDone.current && !reduced) return;
