@@ -1,8 +1,9 @@
 "use server";
 
+import { SHOOTS } from "@/components/contact/shoots";
 import { EMAIL } from "@/components/site";
 
-export type Field = "name" | "email" | "message";
+export type Field = "name" | "email" | "shoot" | "message";
 
 export type ContactState = {
   status: "idle" | "sent" | "error";
@@ -18,6 +19,7 @@ export async function sendMessage(_prev: ContactState, form: FormData): Promise<
   const values = {
     name: String(form.get("name") ?? "").trim(),
     email: String(form.get("email") ?? "").trim(),
+    shoot: String(form.get("shoot") ?? "").trim(),
     message: String(form.get("message") ?? "").trim(),
   };
 
@@ -27,6 +29,7 @@ export async function sendMessage(_prev: ContactState, form: FormData): Promise<
   if (!values.name) errors.name = "Please tell me your name.";
   else if (values.name.length > 120) errors.name = "That name is a little long.";
   if (!EMAIL_PATTERN.test(values.email)) errors.email = "Please enter a valid email address.";
+  if (!SHOOTS.includes(values.shoot)) errors.shoot = "Please choose the kind of shoot.";
   if (!values.message) errors.message = "Please write a short message.";
   else if (values.message.length > 5000) errors.message = "Please keep it under 5,000 characters.";
   if (Object.keys(errors).length) return { status: "error", errors, values };
@@ -44,8 +47,8 @@ export async function sendMessage(_prev: ContactState, form: FormData): Promise<
       from: process.env.CONTACT_FROM ?? "themodumaliq website <onboarding@resend.dev>",
       to: [to],
       reply_to: values.email,
-      subject: `New enquiry from ${values.name}`,
-      text: `${values.message}\n\n${values.name} <${values.email}>`,
+      subject: `New ${values.shoot} enquiry from ${values.name}`,
+      text: `Kind of shoot: ${values.shoot}\n\n${values.message}\n\n${values.name} <${values.email}>`,
     }),
   });
 

@@ -1,12 +1,17 @@
 import type { ReactNode } from "react";
-import { INSTAGRAM } from "./site";
+import { INSTAGRAM, WHATSAPP } from "./site";
 import Year from "./Year";
 
 const socials: { label: string; href: string; icon: ReactNode }[] = [
   {
-    label: "Facebook",
-    href: "#",
-    icon: <path d="M15 3h-2.5A3.5 3.5 0 0 0 9 6.5V9H6.5v3H9v9h3v-9h2.6l.4-3H12V7a1 1 0 0 1 1-1h2Z" />,
+    label: "WhatsApp",
+    href: WHATSAPP,
+    icon: (
+      <>
+        <path d="M20.5 11.6a8.5 8.5 0 0 1-12.6 7.4L3.5 20.5l1.5-4.3a8.5 8.5 0 1 1 15.5-4.6Z" />
+        <path d="M9 8.2c.2-.5.5-.6.8-.6h.6c.2 0 .4.1.5.4l.7 1.6c.1.2 0 .5-.1.7l-.5.6c-.1.1-.1.3 0 .5.6 1.1 1.5 2 2.6 2.6.2.1.4.1.5 0l.6-.5c.2-.2.5-.2.7-.1l1.6.7c.3.1.4.3.4.5v.6c0 .3-.1.6-.6.8-.6.3-1.4.4-2.4 0-2.1-.8-3.8-2.5-4.6-4.6-.4-1-.3-1.8 0-2.4Z" />
+      </>
+    ),
   },
   {
     label: "X",

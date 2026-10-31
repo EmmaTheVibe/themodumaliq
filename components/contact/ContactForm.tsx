@@ -2,12 +2,14 @@
 
 import { useActionState } from "react";
 import { sendMessage, type ContactState, type Field } from "@/app/contact/actions";
+import { SHOOTS } from "./shoots";
 
 const initial: ContactState = { status: "idle" };
 
 const fields: { name: Field; label: string; type?: string; autoComplete?: string }[] = [
   { name: "name", label: "Name", autoComplete: "name" },
   { name: "email", label: "Email address", type: "email", autoComplete: "email" },
+  { name: "shoot", label: "Kind of shoot" },
   { name: "message", label: "Message" },
 ];
 
@@ -47,6 +49,34 @@ export default function ContactForm() {
             </label>
             {f.name === "message" ? (
               <textarea {...shared} rows={5} className={`${shared.className} resize-y`} />
+            ) : f.name === "shoot" ? (
+              <div className="relative">
+                <select
+                  {...shared}
+                  defaultValue={state.values?.shoot ?? ""}
+                  className={`${shared.className} cursor-pointer appearance-none pr-8 invalid:text-foreground/40`}
+                  style={{ colorScheme: "dark" }}
+                >
+                  <option value="" disabled>
+                    Select one…
+                  </option>
+                  {SHOOTS.map((s) => (
+                    <option key={s} value={s}>
+                      {s}
+                    </option>
+                  ))}
+                </select>
+                <svg
+                  viewBox="0 0 24 24"
+                  className="pointer-events-none absolute top-1/2 right-0 mt-1.5 size-4 -translate-y-1/2 opacity-70"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={1.25}
+                  aria-hidden
+                >
+                  <path d="M6 9l6 6 6-6" />
+                </svg>
+              </div>
             ) : (
               <input {...shared} type={f.type ?? "text"} autoComplete={f.autoComplete} />
             )}

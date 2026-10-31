@@ -3,6 +3,7 @@ export const BRAND = "themodumaliq photography";
 export const OWNER = "Moses Momodu";
 export const EMAIL = "themodumaliqphotos@gmail.com";
 export const INSTAGRAM = "https://www.instagram.com/themodumaliq";
+export const WHATSAPP = "https://wa.me/message/3FQOVKWG4L2GM1";
 
 export function jsonLd(data: object) {
   return { __html: JSON.stringify(data).replace(/</g, "\\u003c") };
