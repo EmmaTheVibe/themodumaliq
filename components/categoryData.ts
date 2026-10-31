@@ -17,7 +17,7 @@ export const categories: Category[] = [
     short: "Headshots",
     seoTitle: "Corporate headshots & personal branding in Lagos",
     description:
-      "Corporate headshots and personal branding portraits for professionals, founders and teams in Lagos, Ondo and across Nigeria, by Moses Momodu.",
+      "I am Moses Momodu and I photograph corporate headshots and personal branding portraits for professionals, founders and teams in Lagos, Ondo and across Nigeria.",
     intro:
       "Clean, confident headshots for LinkedIn, company websites, speaker bios and press. I photograph individuals and whole teams, in the studio or at your office, and I’ll guide you through posing so the session feels easy, even if you don’t enjoy being on camera.",
     cover: { photo: "img_1775", focus: "50% 25%" },
@@ -35,7 +35,7 @@ export const categories: Category[] = [
     short: "Portraits",
     seoTitle: "Portrait photography in Lagos",
     description:
-      "Studio and on-location portraits in Lagos and Ondo, for your brand, a milestone or just for you. Relaxed sessions by Moses Momodu.",
+      "I am Moses Momodu and I take relaxed studio and on-location portraits in Lagos and Ondo, for your brand, a milestone or just for you.",
     intro:
       "Portraits for when you want more than a quick snapshot. Whether it’s for your brand, a birthday, a milestone or simply for yourself, we’ll plan the look together and take our time getting pictures that feel like you.",
     cover: { photo: "img_1611", focus: "50% 45%" },
@@ -53,7 +53,7 @@ export const categories: Category[] = [
     short: "Events",
     seoTitle: "Corporate event photography in Lagos",
     description:
-      "Photography for conferences, launches, panels and company events in Lagos and across Nigeria, by Moses Momodu.",
+      "I am Moses Momodu and I photograph conferences, launches, panels and company events in Lagos and across Nigeria.",
     intro:
       "Coverage for conferences, product launches, panels and company celebrations. I work quietly in the background to get the speakers, the room and the moments in between, and deliver edited photos your team can start using straight away.",
     cover: { photo: "img_2215", focus: "43% 30%" },
@@ -70,7 +70,7 @@ export const categories: Category[] = [
     title: "Outdoor & Landscape",
     short: "Landscapes",
     seoTitle: "Outdoor & landscape photography in Nigeria",
-    description: "Outdoor and landscape photography from Lagos, Ondo and around Nigeria, by Moses Momodu.",
+    description: "I am Moses Momodu and I photograph outdoor scenes and landscapes from Lagos, Ondo and around Nigeria.",
     intro: "Places around Lagos, Ondo and further afield, photographed in natural light.",
     subject: "horizon",
     slides: [

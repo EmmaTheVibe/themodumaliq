@@ -76,7 +76,7 @@ export default function Gallery({ slug, title, short, intro, palette, cover, foo
 
   const { context } = useGSAP();
   const tiles = () => gsap.utils.toArray<HTMLElement>("[data-tile]", grid.current);
-  const navbar = () => document.querySelector<HTMLElement>("[data-navbar]");
+  const navbar = () => stage.current?.closest("main")?.querySelector<HTMLElement>("[data-navbar]") ?? null;
 
   useGSAP(() => {
     if (reduced || introDone.current) return;

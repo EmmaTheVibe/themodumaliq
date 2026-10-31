@@ -7,7 +7,7 @@ import { BRAND, EMAIL, INSTAGRAM, OWNER, SITE_URL, jsonLd } from "@/components/s
 export const metadata: Metadata = {
   title: { absolute: `${BRAND} | Corporate headshots, portraits & events in Lagos` },
   description:
-    "Moses Momodu photographs corporate headshots, personal branding portraits and business events in Lagos, Ondo and across Nigeria. See the galleries and book a session.",
+    "I am Moses Momodu and I photograph corporate headshots, personal branding portraits and business events in Lagos, Ondo and across Nigeria.",
   alternates: { canonical: "/" },
 };
 

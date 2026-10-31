@@ -96,7 +96,7 @@ export function useSmoothScroll(
     const tick = (now: number) => {
       const dt = Math.min(now - last, 100);
       last = now;
-      if (first) {
+      if (first && (introMax || mode === "ready")) {
         stageEl.style.translate = "none";
         if (mode === "ready") {
           stageEl.style.transform = "none";
@@ -105,11 +105,13 @@ export function useSmoothScroll(
         first = false;
       }
 
-      if (mode !== "ready") {
+      if (mode !== "ready" && !introMax) {
+        measure();
+      } else if (mode !== "ready") {
         const alpha = alphaFor(snapped ? INTRO_SNAP_LERP : INTRO_LERP, dt);
         introCurrent += (introTarget - introCurrent) * alpha;
         if (Math.abs(introTarget - introCurrent) < 0.01) introCurrent = introTarget;
-        const p = introMax ? introCurrent / introMax : 1;
+        const p = introCurrent / introMax;
         stageEl.style.transform = `translate3d(0, ${introMax - introCurrent}px, 0)`;
         fades.forEach((el) => {
           el.style.opacity = String(1 - p);

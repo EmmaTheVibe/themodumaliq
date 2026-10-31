@@ -8,7 +8,7 @@ import { BRAND, EMAIL, INSTAGRAM, OWNER, SITE_URL, jsonLd } from "@/components/s
 export const metadata: Metadata = {
   title: "About Moses Momodu",
   description:
-    "Moses Momodu is a visual storyteller and brand-focused photographer working between Lagos and Ondo States, shooting corporate headshots, personal branding portraits and corporate events.",
+    "I am Moses Momodu and I’m a visual storyteller and brand-focused photographer working between Lagos and Ondo States, shooting headshots, portraits and events.",
   alternates: { canonical: "/about" },
 };
 

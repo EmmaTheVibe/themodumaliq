@@ -9,7 +9,7 @@ import { EMAIL } from "@/components/site";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Book corporate headshots, personal branding portraits or event coverage in Lagos, Ondo or anywhere in Nigeria. Send a message or email themodumaliqphotos@gmail.com.",
+    "I am Moses Momodu and I’d love to hear about your shoot: corporate headshots, personal branding portraits or events in Lagos, Ondo or anywhere in Nigeria.",
   alternates: { canonical: "/contact" },
 };
 
