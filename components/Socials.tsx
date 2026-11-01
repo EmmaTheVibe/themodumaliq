@@ -43,7 +43,7 @@ export default function Socials({ className }: { className?: string }) {
           >
             <svg
               viewBox="0 0 24 24"
-              className="size-[18px]"
+              className="size-4.5"
               fill="none"
               stroke="currentColor"
               strokeWidth={1.25}
