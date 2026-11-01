@@ -72,6 +72,7 @@ export const categories: Category[] = [
     seoTitle: "Outdoor & landscape photography in Nigeria",
     description: "I am Moses Momodu and I photograph outdoor scenes and landscapes from Lagos, Ondo and around Nigeria.",
     intro: "Places around Lagos, Ondo and further afield, photographed in natural light.",
+    cover: { photo: "bridge-4" },
     subject: "horizon",
     slides: [
       "linear-gradient(180deg, #e8a07a, #6a3f33 70%, #2a1d1a)",

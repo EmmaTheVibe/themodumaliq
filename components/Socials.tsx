@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { INSTAGRAM, WHATSAPP } from "./site";
+import { INSTAGRAM, WHATSAPP, X } from "./site";
 
 const socials: { label: string; href: string; icon: ReactNode }[] = [
   {
@@ -14,7 +14,7 @@ const socials: { label: string; href: string; icon: ReactNode }[] = [
   },
   {
     label: "X",
-    href: "#",
+    href: X,
     icon: <path d="M4 4h4.5L20 20h-4.5ZM20 4l-6.6 7.5M4 20l6.6-7.5" />,
   },
   {

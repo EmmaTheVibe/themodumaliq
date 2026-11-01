@@ -3,7 +3,7 @@ import About from "@/components/About";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { photosFor } from "@/components/gallery/photos";
-import { BRAND, EMAIL, INSTAGRAM, OWNER, SITE_URL, jsonLd } from "@/components/site";
+import { BRAND, EMAIL, INSTAGRAM, OWNER, SITE_URL, X, jsonLd } from "@/components/site";
 
 export const metadata: Metadata = {
   title: "About Moses Momodu",
@@ -22,7 +22,7 @@ const person = {
   email: EMAIL,
   worksFor: { "@type": "ProfessionalService", name: BRAND, url: SITE_URL },
   homeLocation: { "@type": "Place", name: "Lagos, Nigeria" },
-  sameAs: [INSTAGRAM],
+  sameAs: [INSTAGRAM, X],
 };
 
 export default function AboutPage() {

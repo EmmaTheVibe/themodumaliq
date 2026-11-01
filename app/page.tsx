@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Footer from "@/components/Footer";
 import Landing from "@/components/Landing";
 import { categories } from "@/components/categoryData";
-import { BRAND, EMAIL, INSTAGRAM, OWNER, SITE_URL, jsonLd } from "@/components/site";
+import { BRAND, EMAIL, INSTAGRAM, OWNER, SITE_URL, X, jsonLd } from "@/components/site";
 
 export const metadata: Metadata = {
   title: { absolute: `${BRAND} | Corporate headshots, portraits & events in Lagos` },
@@ -28,7 +28,7 @@ const business = {
     { "@type": "State", name: "Ondo" },
     { "@type": "Country", name: "Nigeria" },
   ],
-  sameAs: [INSTAGRAM],
+  sameAs: [INSTAGRAM, X],
   hasOfferCatalog: {
     "@type": "OfferCatalog",
     name: "Photography services",
