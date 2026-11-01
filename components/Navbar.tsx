@@ -19,7 +19,7 @@ const links = [
 const ACTIVE = "#c8a46a";
 
 const LINK =
-  "relative isolate inline-block cursor-pointer px-2 py-1.5 font-display text-[12px] font-medium tracking-[0.12em] min-[400px]:px-3 min-[400px]:text-[14px] min-[400px]:tracking-[0.18em] uppercase opacity-80 transition-[opacity,color] before:absolute before:inset-0 before:-z-10 before:bg-background/20 before:backdrop-blur-[2px] before:[mask-image:radial-gradient(closest-side,#000_55%,transparent)] hover:opacity-100 aria-[current=page]:opacity-100 md:text-[16px]";
+  "relative isolate inline-block cursor-pointer px-2 py-1.5 font-display text-[12px] font-medium tracking-[0.12em] min-[400px]:px-3 min-[400px]:text-[14px] min-[400px]:tracking-[0.18em] uppercase opacity-80 transition-[opacity,color] before:absolute before:inset-0 before:-z-10 before:bg-background/20 before:backdrop-blur-[2px] before:[mask-image:radial-gradient(closest-side,#000_55%,transparent)] hover:opacity-100 aria-[current=page]:opacity-100 md:text-[16px] [@media(hover:none)]:outline-none";
 
 function NavLinks({ active }: { active?: string }) {
   return (

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef, useState, type MouseEvent, type PointerEvent } from "react";
+import { useId, useLayoutEffect, useRef, useState, type MouseEvent, type PointerEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import gsap from "gsap";
@@ -15,6 +15,7 @@ gsap.registerPlugin(useGSAP);
 const ACTIVE = "#c8a46a";
 const PEG = 14;
 const REDUCE = "(prefers-reduced-motion: reduce)";
+const QUIET_FOCUS = { preventScroll: true, focusVisible: false };
 
 const pages = [
   { label: "About", href: "/about" },
@@ -36,10 +37,10 @@ export default function Menu({ active, className }: Props) {
   const [open, setOpen] = useState(false);
   const { context } = useGSAP({ scope: dialog });
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const el = dialog.current;
     return () => el?.close();
-  }, []);
+  }, [active]);
 
   const prints = () => gsap.utils.toArray<HTMLElement>("[data-menu-print]", dialog.current);
 
@@ -90,7 +91,7 @@ export default function Menu({ active, className }: Props) {
   const show = () => {
     const el = dialog.current!;
     el.showModal();
-    closeButton.current?.focus();
+    closeButton.current?.focus(QUIET_FOCUS);
     setOpen(true);
     context.add(() => {
       tl.current?.kill();
@@ -129,14 +130,9 @@ export default function Menu({ active, className }: Props) {
   };
 
   const follow = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
-    if (href === active) {
-      e.preventDefault();
-      hide();
-      return;
-    }
-    tl.current?.kill();
-    dialog.current?.close();
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0 || href !== active) return;
+    e.preventDefault();
+    hide();
   };
 
   return (
