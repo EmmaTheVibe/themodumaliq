@@ -241,7 +241,7 @@ export default function Viewer({ items, title, short, start, rectOf, onClosed }:
                 <button
                   type="button"
                   tabIndex={-1}
-                  aria-hidden={i !== index}
+                  aria-hidden={i !== index}                  data-cursor-skip={i === index ? "" : undefined}
                   onClick={() => goTo(i)}
                   className={`pointer-events-auto relative block h-full w-full overflow-hidden shadow-[0_18px_40px_rgba(0,0,0,0.55)] ${
                     i === index ? "cursor-default" : "cursor-pointer"

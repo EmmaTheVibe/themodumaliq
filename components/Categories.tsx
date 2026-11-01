@@ -241,7 +241,7 @@ export default function Categories({ visible = true }: Props) {
                     aria-hidden
                     className="absolute -top-5 left-1/2 z-10 h-7 w-2.5 -translate-x-1/2 rounded-[2px] bg-[#c8a46a] shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
                   />
-                  <div className="relative aspect-[4/5] overflow-hidden bg-neutral-900 lg:aspect-[3/4]">
+                  <div data-cursor-frame className="relative aspect-[4/5] overflow-hidden bg-neutral-900 lg:aspect-[3/4]">
                     {banner ? (
                       <Image
                         src={banner.src}
@@ -285,7 +285,7 @@ export default function Categories({ visible = true }: Props) {
                 </div>
               </div>
 
-              <div data-caption className="mt-6">
+              <div data-caption data-cursor-skip className="mt-6">
                 <h2 className="text-[15px] leading-[1.35] font-light tracking-[0.14em] uppercase md:text-[17px] lg:min-h-[2.7em]">
                   {category.title}
                 </h2>

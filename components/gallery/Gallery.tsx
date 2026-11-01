@@ -246,8 +246,7 @@ function GalleryVisit({ slug, title, short, intro, palette, cover, footer }: Pro
                     >
                       <button
                         type="button"
-                        aria-label={`View ${title} photograph ${item.id}`}
-                        onClick={() => openViewer(i)}
+                        aria-label={`View ${title} photograph ${item.id}`}                        onClick={() => openViewer(i)}
                         className="absolute inset-0 z-10 cursor-zoom-in focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-foreground/70"
                       />
                       {item.photo ? (

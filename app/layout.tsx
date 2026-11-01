@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Allison, Cormorant_Garamond, Montserrat } from "next/font/google";
+import Cursor from "@/components/Cursor";
 import { BRAND, SITE_URL } from "@/components/site";
 import "./globals.css";
 
@@ -36,7 +37,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${montserrat.variable} ${cormorant.variable} ${allison.variable} h-full bg-background antialiased`}
     >
-      <body className="min-h-full bg-background font-sans text-foreground">{children}</body>
+      <body className="min-h-full bg-background font-sans text-foreground">
+        {children}
+        <Cursor />
+      </body>
     </html>
   );
 }

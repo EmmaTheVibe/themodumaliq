@@ -106,13 +106,13 @@ function NavTitle() {
                     href={g.href}
                     aria-current={current ? "page" : undefined}
                     onClick={() => setOpen(false)}
-                    className="block py-1.5 font-display text-[15px] font-medium tracking-[0.18em] uppercase opacity-80 transition-opacity hover:opacity-100 aria-[current=page]:opacity-100"
+                    className="inline-block py-1.5 font-display text-[15px] font-medium tracking-[0.18em] uppercase opacity-80 transition-opacity hover:opacity-100 aria-[current=page]:opacity-100"
                     style={current ? { color: ACTIVE } : undefined}
                   >
                     {g.short}
                   </Link>
                 ) : (
-                  <span className="flex items-baseline gap-3 py-1.5 font-display text-[15px] font-medium tracking-[0.18em] uppercase opacity-30">
+                  <span className="inline-flex items-baseline gap-3 py-1.5 font-display text-[15px] font-medium tracking-[0.18em] uppercase opacity-30">
                     {g.short}
                     <span className="font-sans text-[9px] tracking-[0.3em]">Soon</span>
                   </span>

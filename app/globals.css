@@ -42,6 +42,14 @@ textarea:-webkit-autofill:focus {
   transition: background-color 600000s 0s, color 600000s 0s;
 }
 
+@media (hover: hover) and (pointer: fine) {
+  *,
+  *::before,
+  *::after {
+    cursor: none !important;
+  }
+}
+
 html:has(dialog[data-menu][open]) {
   overflow: hidden;
 }
