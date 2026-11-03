@@ -9,7 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .map((c) => ({
       url: `${SITE_URL}/${c.slug}`,
       priority: 0.9,
-      images: photosFor(c.slug).map((p) => `${SITE_URL}${p.src}`),
+      images: photosFor(c.slug).map((p) => `${SITE_URL}${encodeURI(p.src)}`),
     }));
   return [
     { url: SITE_URL, priority: 1 },
