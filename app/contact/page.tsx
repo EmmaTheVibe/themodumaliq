@@ -41,7 +41,7 @@ export default function ContactPage() {
   return (
     <main data-no-scrollbar className="flex min-h-dvh flex-col overflow-x-clip">
       <Navbar />
-      <section className="mx-auto grid w-full max-w-[1400px] flex-1 gap-16 px-6 pt-32 pb-24 md:px-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-24 lg:pt-40">
+      <section className="mx-auto grid w-full max-w-350 flex-1 gap-16 px-6 pt-32 pb-24 md:px-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-24 lg:pt-40">
         <div className="lg:sticky lg:top-36 lg:self-start">
           <PrintStack photos={stackPhotos()} />
         </div>
@@ -59,21 +59,27 @@ export default function ContactPage() {
           </h1>
           <div className="mt-8 space-y-5 text-[15px] leading-[1.8] font-light opacity-90 md:text-[16px]">
             <p>
-              If you’re here, you’re likely looking to present yourself or your brand with clarity, confidence, and
-              intention—and that’s exactly where I can help. Whether you need polished corporate headshots, personal
-              branding imagery, or visual coverage for business and corporate events, I’m passionate about creating work
-              that truly reflects who you are and what you stand for.
+              If you’re here, you’re likely looking to present yourself or your
+              brand with clarity, confidence, and intention—and that’s exactly
+              where I can help. Whether you need polished corporate headshots,
+              personal branding imagery, or visual coverage for business and
+              corporate events, I’m passionate about creating work that truly
+              reflects who you are and what you stand for.
             </p>
             <p>
-              I’m always excited to take on new challenges and collaborate with individuals and teams who value
-              thoughtful, high-quality visuals. If you have a project in mind or simply want to explore ideas, I’d love
-              to hear from you—let’s create something impactful together.
+              I’m always excited to take on new challenges and collaborate with
+              individuals and teams who value thoughtful, high-quality visuals.
+              If you have a project in mind or simply want to explore ideas, I’d
+              love to hear from you—let’s create something impactful together.
             </p>
           </div>
           <ContactForm />
           <p className="mt-10 text-[13px] tracking-[0.04em] opacity-70">
             Prefer email? Write to{" "}
-            <a href={`mailto:${EMAIL}`} className="border-b border-foreground/30 transition-colors hover:border-foreground">
+            <a
+              href={`mailto:${EMAIL}`}
+              className="border-b border-foreground/30 transition-colors hover:border-foreground"
+            >
               {EMAIL}
             </a>
           </p>

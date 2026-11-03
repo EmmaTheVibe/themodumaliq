@@ -239,9 +239,9 @@ export default function Categories({ visible = true }: Props) {
                 <div data-print className="relative will-change-transform">
                   <span
                     aria-hidden
-                    className="absolute -top-5 left-1/2 z-10 h-7 w-2.5 -translate-x-1/2 rounded-[2px] bg-[#c8a46a] shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
+                    className="absolute -top-5 left-1/2 z-10 h-7 w-2.5 -translate-x-1/2 rounded-xs bg-[#c8a46a] shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
                   />
-                  <div data-cursor-frame className="relative aspect-[4/5] overflow-hidden bg-neutral-900 lg:aspect-[3/4]">
+                  <div data-cursor-frame className="relative aspect-4/5 overflow-hidden bg-neutral-900 lg:aspect-3/4">
                     {banner ? (
                       <Image
                         src={banner.src}
@@ -263,9 +263,9 @@ export default function Categories({ visible = true }: Props) {
 
                 <div
                   aria-hidden
-                  className={`pointer-events-none absolute z-10 hidden -translate-y-[1.12em] font-display lg:block text-[clamp(36px,4.2vw,72px)] leading-none font-light whitespace-nowrap uppercase ${
+                  className={`pointer-events-none absolute z-10 hidden translate-y-[-1.12em] font-display lg:block text-[clamp(36px,4.2vw,72px)] leading-none font-light whitespace-nowrap uppercase ${
                     i < categories.length / 2
-                      ? "top-full left-0 -translate-x-[0.4em]"
+                      ? "top-full left-0 translate-x-[-0.4em]"
                       : "top-0 right-0 translate-x-[0.4em]"
                   }`}
                 >

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Allison, Cormorant_Garamond, Montserrat } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import Cursor from "@/components/Cursor";
 import { BRAND, SITE_URL } from "@/components/site";
 import "./globals.css";
@@ -40,6 +41,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full bg-background font-sans text-foreground">
         {children}
         <Cursor />
+        <Analytics />
       </body>
     </html>
   );

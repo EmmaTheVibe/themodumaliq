@@ -1,4 +1,4 @@
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://themodumaliq.vercel.app";
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://themodumaliq.com";
 export const BRAND = "themodumaliq photography";
 export const OWNER = "Moses Momodu";
 export const EMAIL = "themodumaliqphotos@gmail.com";

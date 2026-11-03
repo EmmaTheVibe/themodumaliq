@@ -191,7 +191,7 @@ function GalleryVisit({ slug, title, short, intro, palette, cover, footer }: Pro
               className="object-cover"
               style={{ objectPosition: cover.focus }}
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/35 to-black/60" />
+            <div className="absolute inset-0 bg-linear-to-b from-black/55 via-black/35 to-black/60" />
           </>
         )}
         <p data-hero-fade className="relative pt-5 text-[12px] tracking-[0.24em] uppercase opacity-80">
@@ -199,7 +199,7 @@ function GalleryVisit({ slug, title, short, intro, palette, cover, footer }: Pro
             Scroll to explore
           </span>
         </p>
-        <div className="relative flex w-full max-w-[1400px] flex-1 items-center justify-center px-6">
+        <div className="relative flex w-full max-w-350 flex-1 items-center justify-center px-6">
           <div data-hero-fade>
             <p
               data-hero-scale
@@ -247,7 +247,7 @@ function GalleryVisit({ slug, title, short, intro, palette, cover, footer }: Pro
                       <button
                         type="button"
                         aria-label={`View ${title} photograph ${item.id}`}                        onClick={() => openViewer(i)}
-                        className="absolute inset-0 z-10 cursor-zoom-in focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-foreground/70"
+                        className="absolute inset-0 z-10 cursor-zoom-in focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-foreground/70"
                       />
                       {item.photo ? (
                         <Image

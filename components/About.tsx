@@ -52,9 +52,9 @@ export default function About({ portrait }: { portrait?: Photo }) {
   return (
     <section
       ref={root}
-      className="mx-auto grid w-full max-w-[1400px] flex-1 gap-14 px-6 pt-36 pb-24 md:px-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:items-center lg:gap-24 lg:pt-40 fit:min-h-0 fit:pt-24 fit:pb-8"
+      className="mx-auto grid w-full max-w-350 flex-1 gap-14 px-6 pt-36 pb-24 md:px-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:items-center lg:gap-24 lg:pt-40 fit:min-h-0 fit:pt-24 fit:pb-8"
     >
-      <div className="relative mx-auto w-full max-w-[520px] fit:w-auto">
+      <div className="relative mx-auto w-full max-w-130 fit:w-auto">
         <span
           data-string
           aria-hidden
@@ -64,7 +64,7 @@ export default function About({ portrait }: { portrait?: Photo }) {
         <div data-print className="relative opacity-0 will-change-transform motion-reduce:opacity-100">
           <span
             aria-hidden
-            className="absolute -top-5 left-1/2 z-10 h-7 w-2.5 -translate-x-1/2 rounded-[2px] bg-[#c8a46a] shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
+            className="absolute -top-5 left-1/2 z-10 h-7 w-2.5 -translate-x-1/2 rounded-xs bg-[#c8a46a] shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
           />
           {portrait && (
             <Image

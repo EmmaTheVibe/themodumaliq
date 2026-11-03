@@ -236,7 +236,7 @@ export default function Viewer({ items, title, short, start, rectOf, onClosed }:
               <div data-swing className="relative h-full w-full" style={{ transformOrigin: `50% -${PEG}px` }}>
                 <span
                   aria-hidden
-                  className="absolute -top-5 left-1/2 z-10 h-7 w-2.5 -translate-x-1/2 rounded-[2px] bg-[#c8a46a] shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
+                  className="absolute -top-5 left-1/2 z-10 h-7 w-2.5 -translate-x-1/2 rounded-xs bg-[#c8a46a] shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
                 />
                 <button
                   type="button"

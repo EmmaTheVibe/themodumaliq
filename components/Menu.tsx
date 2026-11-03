@@ -1,6 +1,13 @@
 "use client";
 
-import { useId, useLayoutEffect, useRef, useState, type MouseEvent, type PointerEvent } from "react";
+import {
+  useId,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type MouseEvent,
+  type PointerEvent,
+} from "react";
 import Image from "next/image";
 import Link from "next/link";
 import gsap from "gsap";
@@ -42,11 +49,13 @@ export default function Menu({ active, className }: Props) {
     return () => el?.close();
   }, [active]);
 
-  const prints = () => gsap.utils.toArray<HTMLElement>("[data-menu-print]", dialog.current);
+  const prints = () =>
+    gsap.utils.toArray<HTMLElement>("[data-menu-print]", dialog.current);
 
   const hang = (slug: string | null) => {
     if (slug === shown.current) return;
-    const find = (s: string | null) => (s ? prints().find((p) => p.dataset.menuPrint === s) : undefined);
+    const find = (s: string | null) =>
+      s ? prints().find((p) => p.dataset.menuPrint === s) : undefined;
     const prev = find(shown.current);
     const next = find(slug);
     shown.current = slug;
@@ -58,7 +67,13 @@ export default function Menu({ active, className }: Props) {
         prev,
         reduce
           ? { opacity: 0, duration: 0.2 }
-          : { y: -50, opacity: 0, rotation: 5, duration: 0.3, ease: "power2.in" },
+          : {
+              y: -50,
+              opacity: 0,
+              rotation: 5,
+              duration: 0.3,
+              ease: "power2.in",
+            },
       );
     }
     if (!next) return;
@@ -71,7 +86,12 @@ export default function Menu({ active, className }: Props) {
       .timeline({ delay: prev ? 0.12 : 0 })
       .fromTo(
         next,
-        { y: -110, opacity: 0, rotation: -10, transformOrigin: `50% -${PEG}px` },
+        {
+          y: -110,
+          opacity: 0,
+          rotation: -10,
+          transformOrigin: `50% -${PEG}px`,
+        },
         { y: 0, opacity: 1, duration: 0.45, ease: "power2.in" },
       )
       .to(next, { rotation: 0, duration: 1.8, ease: "elastic.out(1.1, 0.3)" });
@@ -80,7 +100,9 @@ export default function Menu({ active, className }: Props) {
   const preview = (slug: string | null) => {
     context.add(() => {
       intent.current?.kill();
-      intent.current = gsap.delayedCall(0.06, () => context.add(() => hang(slug)));
+      intent.current = gsap.delayedCall(0.06, () =>
+        context.add(() => hang(slug)),
+      );
     });
   };
 
@@ -96,15 +118,32 @@ export default function Menu({ active, className }: Props) {
     context.add(() => {
       tl.current?.kill();
       tl.current = window.matchMedia(REDUCE).matches
-        ? gsap.timeline().fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.3 })
+        ? gsap
+            .timeline()
+            .fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.3 })
         : gsap
             .timeline()
-            .fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.out" })
-            .fromTo("[data-menu-line]", { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: "power2.inOut" }, 0.1)
+            .fromTo(
+              el,
+              { opacity: 0 },
+              { opacity: 1, duration: 0.4, ease: "power2.out" },
+            )
+            .fromTo(
+              "[data-menu-line]",
+              { scaleX: 0 },
+              { scaleX: 1, duration: 0.8, ease: "power2.inOut" },
+              0.1,
+            )
             .fromTo(
               "[data-menu-rise]",
               { opacity: 0, y: 28 },
-              { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", stagger: 0.06 },
+              {
+                opacity: 1,
+                y: 0,
+                duration: 0.7,
+                ease: "power3.out",
+                stagger: 0.06,
+              },
               0.12,
             );
     });
@@ -115,7 +154,14 @@ export default function Menu({ active, className }: Props) {
     context.add(() => {
       tl.current?.kill();
       intent.current?.kill();
-      tl.current = gsap.timeline().to(el, { opacity: 0, duration: 0.3, ease: "power2.in", onComplete: () => el.close() });
+      tl.current = gsap
+        .timeline()
+        .to(el, {
+          opacity: 0,
+          duration: 0.3,
+          ease: "power2.in",
+          onComplete: () => el.close(),
+        });
     });
   };
 
@@ -130,7 +176,14 @@ export default function Menu({ active, className }: Props) {
   };
 
   const follow = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0 || href !== active) return;
+    if (
+      e.metaKey ||
+      e.ctrlKey ||
+      e.shiftKey ||
+      e.button !== 0 ||
+      href !== active
+    )
+      return;
     e.preventDefault();
     hide();
   };
@@ -170,14 +223,22 @@ export default function Menu({ active, className }: Props) {
             >
               <ScriptLogo className="h-7 min-[400px]:h-8 md:h-10" />
             </Link>
-            <button ref={closeButton} type="button" onClick={hide} className={className}>
+            <button
+              ref={closeButton}
+              type="button"
+              onClick={hide}
+              className={className}
+            >
               Close
             </button>
           </div>
 
-          <div className="mx-auto grid w-full max-w-[1400px] flex-1 content-center gap-16 px-6 py-10 md:px-10 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] lg:items-center lg:gap-24">
+          <div className="mx-auto grid w-full max-w-350 flex-1 content-center gap-16 px-6 py-10 md:px-10 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] lg:items-center lg:gap-24">
             <nav aria-label="Site">
-              <p data-menu-rise className="text-[11px] tracking-[0.3em] uppercase opacity-60">
+              <p
+                data-menu-rise
+                className="text-[11px] tracking-[0.3em] uppercase opacity-60"
+              >
                 Galleries
               </p>
               <ul className="mt-5">
@@ -202,7 +263,9 @@ export default function Menu({ active, className }: Props) {
                       ) : (
                         <span className="inline-flex flex-wrap items-baseline gap-x-4 font-display text-[clamp(42px,9vw,96px)] leading-[1.08] font-light uppercase opacity-30">
                           {g.short}
-                          <span className="font-sans text-[10px] tracking-[0.3em]">Soon</span>
+                          <span className="font-sans text-[10px] tracking-[0.3em]">
+                            Soon
+                          </span>
                         </span>
                       )}
                     </li>
@@ -231,8 +294,14 @@ export default function Menu({ active, className }: Props) {
             </nav>
 
             <div aria-hidden className="relative hidden lg:block">
-              <span data-menu-line className="absolute -inset-x-10 top-0 h-px origin-left bg-foreground/40" />
-              <div className="relative mx-auto aspect-[4/5] w-[min(26vw,360px)]" style={{ marginTop: PEG }}>
+              <span
+                data-menu-line
+                className="absolute -inset-x-10 top-0 h-px origin-left bg-foreground/40"
+              />
+              <div
+                className="relative mx-auto aspect-4/5 w-[min(26vw,360px)]"
+                style={{ marginTop: PEG }}
+              >
                 {galleries.map(
                   (g) =>
                     g.banner && (
@@ -242,7 +311,7 @@ export default function Menu({ active, className }: Props) {
                         className="absolute inset-0 opacity-0 will-change-transform"
                         style={{ transformOrigin: `50% -${PEG}px` }}
                       >
-                        <span className="absolute -top-5 left-1/2 z-10 h-7 w-2.5 -translate-x-1/2 rounded-[2px] bg-[#c8a46a] shadow-[0_1px_2px_rgba(0,0,0,0.5)]" />
+                        <span className="absolute -top-5 left-1/2 z-10 h-7 w-2.5 -translate-x-1/2 rounded-xs bg-[#c8a46a] shadow-[0_1px_2px_rgba(0,0,0,0.5)]" />
                         <div className="relative h-full overflow-hidden bg-neutral-900 shadow-[0_18px_40px_rgba(0,0,0,0.55)]">
                           <Image
                             src={g.banner.src}
