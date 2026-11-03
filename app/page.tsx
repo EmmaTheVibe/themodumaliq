@@ -11,6 +11,14 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
+const website = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: BRAND,
+  alternateName: ["themodumaliq", `${OWNER} Photography`],
+  url: `${SITE_URL}/`,
+};
+
 const business = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
@@ -42,6 +50,7 @@ const business = {
 export default function Home() {
   return (
     <main className="min-h-dvh">
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(website)} />
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(business)} />
       <h1 className="sr-only">themodumaliq photography: corporate headshots, portraits and event photography in Lagos</h1>
       <Landing footer={<Footer />} />
