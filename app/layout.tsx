@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Allison, Cormorant_Garamond, Montserrat } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import Cursor from "@/components/Cursor";
+import Signature from "@/components/Signature";
 import { BRAND, SITE_URL } from "@/components/site";
 import "./globals.css";
 
@@ -42,6 +43,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {children}
         <Cursor />
         <Analytics />
+        <Signature />
       </body>
     </html>
   );

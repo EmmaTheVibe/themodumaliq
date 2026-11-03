@@ -13,6 +13,7 @@ import Link from "next/link";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { galleries } from "./galleries";
+import Credit from "./Credit";
 import ScriptLogo from "./ScriptLogo";
 import Socials from "./Socials";
 import { EMAIL } from "./site";
@@ -342,6 +343,7 @@ export default function Menu({ active, className }: Props) {
             >
               {EMAIL}
             </a>
+            <Credit />
           </div>
         </div>
       </dialog>

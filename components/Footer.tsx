@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Credit from "./Credit";
 import Socials from "./Socials";
 import Year from "./Year";
 
@@ -25,9 +26,12 @@ export default function Footer() {
 
       <Socials className="flex items-center gap-6 sm:col-start-2 sm:gap-5" />
 
-      <p className="text-center text-[10px] tracking-[0.2em] uppercase opacity-60 sm:col-start-3 sm:justify-self-end sm:text-right">
-        © <Year /> themodumaliq photography
-      </p>
+      <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 text-center sm:col-start-3 sm:justify-end sm:justify-self-end sm:text-right">
+        <p className="text-[10px] tracking-[0.2em] uppercase opacity-60">
+          © <Year /> themodumaliq photography
+        </p>
+        <Credit />
+      </div>
     </footer>
   );
 }
